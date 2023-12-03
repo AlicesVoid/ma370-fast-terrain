@@ -1,8 +1,11 @@
-function [tri x y z] = dem2tin(ZI,R,ZImask)
+function [tri x y z] = dem2tin(ZI, ZImask, R)
 
-    % If no referencing matrix is provided, make a generic one.
-    if isempty(R)
-        R = [0 1; 1 0; 0 0];
+    % Default values for optional arguments
+    R_def = [0 1; 1 0; 0 0]; 
+
+    % Check if R is provided
+    if nargin < 3 || isempty(R)
+        R = R_def;
     end
 
     % Create the grid
@@ -19,6 +22,36 @@ function [tri x y z] = dem2tin(ZI,R,ZImask)
     tri = delaunay(x,y);
 
 end
+
+
+
+% function [tri, x, y, z] = dem2tin(ZI, R, tol)
+% 
+%     % Default values for optional arguments
+%     defaultR = [0 1; 1 0; 0 0]; % Default referencing matrix
+%     defaultTol = 1; % Default tolerance
+% 
+%     % Check if R is provided
+%     if nargin < 2 || isempty(R)
+%         R = defaultR;
+%     end
+% 
+%     % Check if tol is provided
+%     if nargin < 3 || isempty(tol)
+%         tol = defaultTol;
+%     end
+% 
+%     % Create the grid
+%     [xi, yi] = ir2xiyi(ZI, R);
+%     [XI, YI] = meshgrid(xi, yi);
+% 
+%     % Implement tolerance-based point selection
+%     [x, y, z] = selectPointsBasedOnTolerance(ZI, XI, YI, tol);
+% 
+%     % Create the triangulation
+%     tri = delaunay(x, y);
+% 
+% end
 
 % Generic little function to get the vectors that correspond to the
 % axes of the raster

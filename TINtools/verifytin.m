@@ -6,7 +6,7 @@ function [ZIe ZIn] = verifytin(ZI,R,x,y,z)
 %     [yp xp] = map2pix(R,XI(:),YI(:));
 
     % Interpolate
-    TRI = TriScatteredInterp(x,y,z,'linear');
+    TRI = scatteredInterpolant(x,y,z,'linear');
     ZIn = TRI(XI(:),YI(:));
     ZIn = reshape(ZIn,size(ZI));
     ZIe = ZI -  ZIn;
