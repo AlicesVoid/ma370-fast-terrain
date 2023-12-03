@@ -48,8 +48,10 @@ function [ZImask] = vipmask(ZI,thresh,keepcorners)
     
     
     % The measure of significance is the sum of the distanceMatrix for each
-    % pixel.
-    ZId = mean(distanceMatrix,3);
+    % pixel with a random factor added to evenly spread VIPs
+    rng('default'); % For reproducibility
+    randomFactor = rand(size(ZI)); % Generate a matrix of random values the same size as ZI
+    ZId = mean(distanceMatrix,3) + randomFactor; % Add the random factor to the significance measure
     clear distanceMatrix
 
     
