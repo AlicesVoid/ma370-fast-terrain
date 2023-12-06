@@ -39,9 +39,9 @@ figure(2); clf;
 tic;
 trisurf(tri, x, y, z);
 TIN_time = toc;
-TIN_FPS = round(1 / TIN_time);
 
 % Update Figure and Separate
+
 title(['myTIN: (', num2str(100*point_tol), '% Point Tolerance)']);
 
 % == myPovTIN ===================================================
@@ -54,7 +54,6 @@ figure(3); clf; grid off; box off;
 tic;
 trisurf(tri, x, y, z);
 povTIN_time = toc; 
-povTIN_FPS = round(1 / povTIN_time);
 
 % Set axis limits (do not change xlim, ylim, or zlim)
 xlim([0, sizeDEM]);
@@ -79,11 +78,8 @@ camproj perspective;
 disp(' '); disp('Benchmarking Results:');
 disp('---------------------------');
 disp(['DEM      | ', num2str(DEM_time, '%.5f'), ' seconds']);
-disp(['DEM      | ', num2str(DEM_FPS, '%4d'), ' Frames per Second']);
 disp('---------------------------');
 disp(['myTIN    | ', num2str(TIN_time, '%.5f'), ' seconds' ]);
-disp(['myTIN    | ', num2str(TIN_FPS, '%4d'), ' Frames per Second' ]);
 disp('---------------------------');
 disp(['myPovTIN | ', num2str(povTIN_time, '%.5f'), ' seconds']);
-disp(['myPovTIN | ', num2str(povTIN_FPS, '%3d'), ' Frames per Second']);
 disp('---------------------------'); disp(' ');
